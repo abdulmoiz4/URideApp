@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<script>
+    function checkSearchChanged()
+    {
+        var currentValue = $('#txtsearch').val();
+        var ajaxMethodUrl = "@(Url.Action("SearchName", "Home"))";
+        //alert(currentValue);
+        $("#txtsearch").autocomplete({
+            source: function ( request,response)
+            {
+                var names = new Array();
+                $.ajax({
+                    async: false,
+                    cache: false,
+                    type: "Get",
+                    url: ajaxMethodUrl,
+                    data: { "SearchKeyword": $('#txtsearch').val() },
+                    success: function (data)
+                    {
+                        for(var i = 0 ; i<data.length ; i++ )
+                            names[i] = {label:data[i], id:data[i] };
+                    }
+                });
+                response(names);
+            }
+        });
+    }
+    function checkSearchChanged1()
+    {
+        var currentValue = $('#txtsearch1').val();
+        var ajaxMethodUrl = "@(Url.Action("SearchName1", "Home"))";
+        //alert(currentValue);
+        $("#txtsearch1").autocomplete({
+            source: function ( request,response)
+            {
+                var names = new Array();
+                $.ajax({
+                    async: false,
+                    cache: false,
+                    type: "Get",
+                    url: ajaxMethodUrl,
+                    data: { "SearchKeyword": $('#txtsearch1').val() },
+                    success: function (data)
+                    {
+                        for(var i = 0 ; i<data.length ; i++ )
+                            names[i] = {label:data[i], id:data[i] };
+                    }
+                });
+                response(names);
+            }
+        });
+    }
+
+    function checkSearchChanged2()
+    {
+        var currentValue = $('#txtsearch2').val();
+        var ajaxMethodUrl = "@(Url.Action("SearchName2", "Home"))";
+        //alert(currentValue);
+        $("#txtsearch2").autocomplete({
+            source: function ( request,response)
+            {
+                var names = new Array();
+                $.ajax({
+                    async: false,
+                    cache: false,
+                    type: "Get",
+                    url: ajaxMethodUrl,
+                    data: { "SearchKeyword": $('#txtsearch2').val() },
+                    success: function (data)
+                    {
+                        for(var i = 0 ; i<data.length ; i++ )
+                            names[i] = {label:data[i], id:data[i] };
+                    }
+                });
+                response(names);
+            }
+        });
+    }
+
+</script>
+<div class="jumbotron">
+    <h1>U-Ride App</h1>
+    <input type="text" class="form-control control-label" id="txtsearch" onkeyup="checkSearchChanged()" placeholder="Search Driver" />
+    <input type="text" class="form-control control-label" id="txtsearch1" onkeyup="checkSearchChanged1()" placeholder="Search Passenger" />
+    <input type="text" class="form-control control-label" id="txtsearch2" onkeyup="checkSearchChanged2()" placeholder="Search Car" />
+
+</div>
